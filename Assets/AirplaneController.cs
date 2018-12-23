@@ -14,7 +14,7 @@ public class AirplaneController : MonoBehaviour
     public Text ScoreGui;
     public Text WastedGui;
     public GameObject AiPlane;
-
+    public GameObject Explosion;
 
     private Vector3 startPosition;
     private bool isAsceding;
@@ -40,10 +40,10 @@ public class AirplaneController : MonoBehaviour
         Invoke("DoABarrelRoll", Random.Range(5f, 20f));
     }
 
-    void Update()
+    void Update()    
     {
         isAsceding = Input.GetButton("Fire1");
-        ScoreGui.text = "" + (int) Score;
+        ScoreGui.text =  (Score/10).ToString("0.00") + "%";
     }
 
     private void FixedUpdate()
@@ -94,6 +94,7 @@ public class AirplaneController : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             isDead = true;
+            Instantiate(Explosion, transform);
             WastedGui.gameObject.SetActive(true);
             AiPlane.GetComponent<AIAirplane>().IsDead = false;
             FindObjectOfType<LevelGenerator>().IsDead = true;
