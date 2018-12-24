@@ -18,7 +18,6 @@ public class ParticleConstraints : MonoBehaviour
         _particles = new ParticleSystem.Particle[MaxParticles];
     }
 
-
     void Update()
     {
         var count = _system.GetParticles(_particles);

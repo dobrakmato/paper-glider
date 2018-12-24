@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OOB
   - Obstacle
+  - PlaneTrail
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Player
+  - PlayerParticleReceiver
+  - Fire
   - 
   - 
   - 
