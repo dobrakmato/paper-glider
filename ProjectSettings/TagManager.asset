@@ -7,6 +7,9 @@ TagManager:
   - OOB
   - Obstacle
   - PlaneTrail
+  - Enemy
+  - PlayerObstacleCollider
+  - SpeedPowerUp
   layers:
   - Default
   - TransparentFX

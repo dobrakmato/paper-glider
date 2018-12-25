@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    /* Default player speed. */
+    public const float DefaultSpeed = 16f;
+
     public GameObject[] Objects;
     public float Speed = 1f;
     public float GenerateZ = -1f;
     public bool IsDead;
+    public bool IsGenerating = true;
 
     private float Z_TO_REMOVE = 25f;
     private readonly List<GameObject> _visibleObjects = new List<GameObject>(256);
@@ -18,7 +23,7 @@ public class LevelGenerator : MonoBehaviour
     private float envChunkZScale = 2f;
     private float envRemaining;
     private GameObject envLastGeneratedTerrain;
-    
+
     void Start()
     {
         StartGeneration();
@@ -29,7 +34,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void StartGeneration()
     {
-        if (!IsDead)
+        if (!IsDead && IsGenerating)
         {
             GenerateSection();
         }
@@ -46,7 +51,7 @@ public class LevelGenerator : MonoBehaviour
     private void TryGenerateEnv()
     {
         envRemaining += -Speed * Time.deltaTime;
-      
+
         if (envRemaining < 0)
         {
             GenerateEnv();
@@ -80,7 +85,9 @@ public class LevelGenerator : MonoBehaviour
     private void GenerateEnv()
     {
         envRemaining = envChunkZSize;
-        var genZ = envLastGeneratedTerrain != null ? envLastGeneratedTerrain.transform.position.z - envChunkZSize : envGenerateZ; 
+        var genZ = envLastGeneratedTerrain != null
+            ? envLastGeneratedTerrain.transform.position.z - envChunkZSize
+            : envGenerateZ;
         var obj = Instantiate(
             EnvTerrain,
             new Vector3(0, -1.5f, genZ),
@@ -122,6 +129,41 @@ public class LevelGenerator : MonoBehaviour
                 _visibleObjects.RemoveAt(i);
                 Destroy(obj);
             }
+        }
+    }
+
+    public struct SpeedUpParams
+    {
+        public float TargetSpeed { get; set; }
+        public float Time { get; set; }
+        public float TargetFov { get; set; }
+    }
+
+    public void RestartLevel()
+    {
+        IsDead = false;
+        IsGenerating = true;
+
+        StartCoroutine("LevelSpeedup", new SpeedUpParams
+        {
+            Time = 0.5f,
+            TargetSpeed = DefaultSpeed,
+            TargetFov = 70f
+        });
+    }
+
+    public IEnumerator LevelSpeedup(SpeedUpParams p)
+    {
+        var elapsed = 0f;
+        var old = Speed;
+        var oldFov = Camera.main.fieldOfView;
+        while (elapsed < p.Time)
+        {
+            var f = elapsed / p.Time;
+            Speed = Mathf.Lerp(old, p.TargetSpeed, f);
+            Camera.main.fieldOfView = Mathf.Lerp(oldFov, p.TargetFov, f);
+            elapsed += Time.deltaTime;
+            yield return null; // next frame
         }
     }
 }

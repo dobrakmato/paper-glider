@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="Assets\AIAirplane.cs" />
     <Compile Include="Assets\AirplaneController.cs" />
+    <Compile Include="Assets\BrakingAiAirplane.cs" />
+    <Compile Include="Assets\Coin.cs" />
+    <Compile Include="Assets\DestroyPlayer.cs" />
     <Compile Include="Assets\FollowAirplane.cs" />
     <Compile Include="Assets\HalfResolution.cs" />
     <Compile Include="Assets\LevelGenerator.cs" />
@@ -69,7 +72,10 @@
     <Compile Include="Assets\Scripts\ProcedularGeneration\ProceduralGeneratedTerrain.cs" />
     <Compile Include="Assets\Scripts\ScriptedMovement.cs" />
     <Compile Include="Assets\Scripts\SinMover.cs" />
+    <Compile Include="Assets\Scripts\TutorialGui.cs" />
+    <Compile Include="Assets\Scripts\UiLogoRandomMovement.cs" />
     <None Include="Assets\Shaders\TerrainShader.shader" />
+    <None Include="Assets\Shaders\FrostedGlass.shader" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/Matej/Documents/Unity/paper_glider/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
