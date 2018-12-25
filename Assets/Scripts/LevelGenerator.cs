@@ -16,6 +16,8 @@ public class LevelGenerator : MonoBehaviour
     private float Z_TO_REMOVE = 25f;
     private readonly List<GameObject> _visibleObjects = new List<GameObject>(256);
 
+    public AudioSource SpeedUpSoundSource;
+
     public GameObject EnvTerrain;
     private int envChunkZId;
     private float envGenerateZ = -128f;
@@ -137,6 +139,7 @@ public class LevelGenerator : MonoBehaviour
         public float TargetSpeed { get; set; }
         public float Time { get; set; }
         public float TargetFov { get; set; }
+        public bool PlaySound { get; set; }
     }
 
     public void RestartLevel()
@@ -154,6 +157,11 @@ public class LevelGenerator : MonoBehaviour
 
     public IEnumerator LevelSpeedup(SpeedUpParams p)
     {
+        if (p.PlaySound)
+        {
+            SpeedUpSoundSource.Play();
+        }
+
         var elapsed = 0f;
         var old = Speed;
         var oldFov = Camera.main.fieldOfView;

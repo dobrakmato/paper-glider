@@ -193,7 +193,8 @@ public class AirplaneController : MonoBehaviour
         {
             Time = 0.5f,
             TargetSpeed = LevelGenerator.DefaultSpeed * 2,
-            TargetFov = 90f
+            TargetFov = 90f,
+            PlaySound = true
         });
 
         Invoke("TriggerSlowDown", 5f);
