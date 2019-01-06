@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     /* Default player speed. */
-    public const float DefaultSpeed = 16f;
+    public const float DefaultSpeed = 48f; // 16f
 
     public GameObject[] Objects;
     public float Speed = 1f;
@@ -18,20 +18,27 @@ public class LevelGenerator : MonoBehaviour
 
     public AudioSource SpeedUpSoundSource;
 
+    public Material Skybox;
+
     public GameObject EnvTerrain;
     private int envChunkZId;
     private float envGenerateZ = -128f;
     private float envChunkZSize = 40f;
     private float envChunkZScale = 2f;
-    private float envRemaining;
     private GameObject envLastGeneratedTerrain;
 
     void Start()
     {
         StartGeneration();
+        GenerateSkybox();
 
         envChunkZScale = EnvTerrain.transform.localScale.z;
         GenerateInitialEnvironment();
+    }
+
+    private void GenerateSkybox()
+    {
+        Skybox.SetFloat("_SkyExponent1", Random.Range(1.5f, 9f));
     }
 
     private void StartGeneration()
@@ -52,9 +59,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void TryGenerateEnv()
     {
-        envRemaining += -Speed * Time.deltaTime;
-
-        if (envRemaining < 0)
+        if (envLastGeneratedTerrain.transform.position.z > GenerateZ)
         {
             GenerateEnv();
         }
@@ -86,10 +91,10 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateEnv()
     {
-        envRemaining = envChunkZSize;
         var genZ = envLastGeneratedTerrain != null
             ? envLastGeneratedTerrain.transform.position.z - envChunkZSize
             : envGenerateZ;
+        
         var obj = Instantiate(
             EnvTerrain,
             new Vector3(0, -1.5f, genZ),
@@ -104,8 +109,10 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateSection()
     {
+        var prefab = Objects[18];
+        
         var obj = Instantiate(
-            Objects[Random.Range(0, Objects.Length)],
+            prefab,
             new Vector3(0, 0, GenerateZ),
             Quaternion.identity
         );

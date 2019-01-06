@@ -98,3 +98,4 @@ MonoBehaviour:
   Subdivisons: 40
   BaseSize: 10
   GenerateAt: {x: 0, y: 0, z: 0}
+  EnvTree: {fileID: 185286, guid: 8ed1fa325ca228645ad26dd6eff14768, type: 2}

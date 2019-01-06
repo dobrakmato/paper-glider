@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9222540e40f2f9147a4da1091fefe388, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -447,11 +447,13 @@ MonoBehaviour:
   - {fileID: 1104668023978954, guid: 93ffa6f3a2f4eda4f9bd929d49ca10fa, type: 2}
   - {fileID: 1585183359312520, guid: c113cd7b092f9504c9257fc973028651, type: 2}
   - {fileID: 1096372408234232, guid: 80722b756e1f1e0459d9aaa36040e24a, type: 2}
+  - {fileID: 1507180376383308, guid: 75fd4f92d1f18e5499861aab36c324a9, type: 2}
   Speed: 0
-  GenerateZ: -60
+  GenerateZ: -120
   IsDead: 0
   IsGenerating: 0
   SpeedUpSoundSource: {fileID: 225932829}
+  Skybox: {fileID: 2100000, guid: 9222540e40f2f9147a4da1091fefe388, type: 2}
   EnvTerrain: {fileID: 1741289189598564, guid: 80d0d891a0d3e934686d2971e928decb, type: 2}
 --- !u!82 &225932829
 AudioSource:
@@ -590,7 +592,7 @@ Camera:
   m_GameObject: {fileID: 332438942}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.36862752, g: 0.67482835, b: 0.8784314, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -6309,7 +6311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -11924,7 +11926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -21673,7 +21675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -21889,7 +21891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

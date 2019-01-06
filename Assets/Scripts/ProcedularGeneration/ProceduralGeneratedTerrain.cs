@@ -11,21 +11,47 @@ public class ProceduralGeneratedTerrain : MonoBehaviour
     public float BaseSize = 10f; // from unity plane
     public Vector3 GenerateAt;
 
+    public GameObject EnvTree;
+
+    [NonSerialized] public int Seed = 0;
+
     private Mesh _mesh;
+
+    private float OffsetPerlinNoise(float x, float y)
+    {
+        var seedOffsetX = 47 + Seed * 7 % 10000;
+        var seedOffsetY = 83 + Seed * 11 % 10000;
+
+        return Mathf.PerlinNoise(seedOffsetX + x, seedOffsetY + y);
+    }
 
     private float Noise(float x, float y)
     {
-        var amp2 = Mathf.PerlinNoise(y * 0.005f, 6947f) * 2f;
-        var r = Mathf.Clamp(Mathf.PerlinNoise(y * 0.005f, 47511f), 0.2f, 1f);
-        
-        var shape = Mathf.Clamp(0.05f * x * x, 0, 3f);
-        var o1 = Mathf.PerlinNoise(x * 1f, y * 1f) * 10f;
-        var o2 = Mathf.PerlinNoise(x * 0.25f, y * 0.25f) * 4f * r;
-        var o3 = Mathf.PerlinNoise(x * 0.1f, y * 0.1f) * 2f * r;
+        var amp2 = OffsetPerlinNoise(y * 0.005f, 6947f) * 2f;
+        var r = Mathf.Clamp(OffsetPerlinNoise(y * 0.005f, 47511f), 0.1f, 1f);
+        var r2 = Mathf.Clamp(OffsetPerlinNoise(y * 0.0001f, 13f), 0.2f, 1f);
 
-        var amp = Mathf.PerlinNoise(y * 0.1f, 37589f) * 32f;
-        
-        return (o1 + o2 + o3) / 16f * shape * amp * amp2;
+        var shape = Mathf.Clamp(0.05f * x * x, 0, 3f);
+        var o1 = OffsetPerlinNoise(x * r2, y * r2) * 10f * r;
+        var o2 = OffsetPerlinNoise(x * 0.25f, y * 0.25f) * 4f * r * r;
+        var o3 = OffsetPerlinNoise(x * 0.1f, y * 0.1f) * 2f * r * r * r;
+
+        var amp = OffsetPerlinNoise(y * 0.1f, 37589f) * 32f;
+
+        var res = (o1 + o2 + o3) / 16f * shape * amp * amp2;
+
+        if (Mathf.Abs(x) > 4f && r <= 0.4f)
+        {
+            if (Random.Range(0f, 1f) > 0.6 + r)
+            {
+                if (Random.Range(0f, 1f) > 0.9f)
+                {
+                    Instantiate(EnvTree, new Vector3(2 * x, res - 1.5f, y / 2), Quaternion.identity, transform);
+                }
+            }
+        }
+
+        return res;
     }
 
     private Vector3 F(Vector3 min, int i, Vector3 size, int j)
