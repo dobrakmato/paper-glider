@@ -8,6 +8,7 @@ public class CoinTrackMarker : MonoBehaviour
     public void Generate()
     {
         var position = Markers[Random.Range(0, Markers.Length)];
-        Instantiate(CoinTrack, position); // as parent of marker
+        var track = Instantiate(CoinTrack, position); // as parent of marker
+        track.GetComponent<CoinTrack>().DestroyUpperRow();
     }
 }

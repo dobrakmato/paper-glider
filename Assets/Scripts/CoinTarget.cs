@@ -9,10 +9,10 @@ public class CoinTarget : MonoBehaviour
     public GameObject CoinPrefab;
 
     private Vector3 _center;
-    private const int Levels = 2;
-    private readonly int[] _levelCounts = new int[Levels] {8, 12};
-    private readonly float[] _levelSizes = new float[Levels] {0.6f, 0.4f};
-    private readonly float[] _levelDistances = new float[Levels] {1.9f, 3.4f};
+    private const int Levels = 1;
+    private readonly int[] _levelCounts = new int[Levels] {8};
+    private readonly float[] _levelSizes = new float[Levels] {0.6f};
+    private readonly float[] _levelDistances = new float[Levels] {1.9f};
 
     void Start()
     {

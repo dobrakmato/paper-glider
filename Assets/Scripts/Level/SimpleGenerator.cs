@@ -9,6 +9,9 @@ public class SimpleGenerator : MonoBehaviour
     public GameObject[] MediumObstacles;
     public GameObject[] HardObstacles;
     public GameObject[] CoinPrefabs;
+    public GameObject BrakingEnemy;
+    
+    private GameObject _player;
 
     private enum Type
     {
@@ -22,6 +25,11 @@ public class SimpleGenerator : MonoBehaviour
     private int _currentDifficulty = 1; // 1 = easy, 2 = medium, 3 = hard
     private int _currentPart = 1;
 
+    private void Start()
+    {
+        _player = FindObjectOfType<AirplaneController>().gameObject;
+    }
+
     public GameObject CreateNext(Vector3 at)
     {
         var obj = _currentType == Type.Obstacle ? CreateNextObstacle(at) : CreateNextCoin(at);
@@ -34,10 +42,22 @@ public class SimpleGenerator : MonoBehaviour
 
     private GameObject CreateNextObstacle(Vector3 at)
     {
+        if (_currentDifficulty > 1 && Random.Range(0f, 1f) > 0.9f)
+        {
+            var p = _player.transform.position;
+            var targetY = p.y > 3f ? 1f : 4f;
+            
+            Instantiate(BrakingEnemy, new Vector3(-p.x, targetY, 9f), Quaternion.identity);
+            return new GameObject();
+        }
+
         var obstacle = Instantiate(ChooseObstacle(), at, Quaternion.identity);
 
         var obstacleCoinTrackMarker = obstacle.GetComponent<CoinTrackMarker>();
-        if (obstacleCoinTrackMarker != null) obstacleCoinTrackMarker.Generate();
+        if (obstacleCoinTrackMarker != null)
+        {
+            if (Random.Range(0f, 1f) > 0.2f) obstacleCoinTrackMarker.Generate();
+        }
 
         return obstacle;
     }
