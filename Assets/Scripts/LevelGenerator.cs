@@ -5,9 +5,8 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     /* Default player speed. */
-    public const float DefaultSpeed = 48f; // 16f
+    public const float DefaultSpeed = 32f; // 16f
 
-    public GameObject[] Objects;
     public float Speed = 1f;
     public float GenerateZ = -1f;
     public bool IsDead;
@@ -27,8 +26,11 @@ public class LevelGenerator : MonoBehaviour
     private float envChunkZScale = 2f;
     private GameObject envLastGeneratedTerrain;
 
+    private SimpleGenerator _generator;
+
     void Start()
     {
+        _generator = GetComponent<SimpleGenerator>();
         StartGeneration();
         GenerateSkybox();
 
@@ -59,7 +61,8 @@ public class LevelGenerator : MonoBehaviour
 
     private void TryGenerateEnv()
     {
-        if (envLastGeneratedTerrain.transform.position.z > GenerateZ)
+        /* for first environment part variable is null */
+        if (envLastGeneratedTerrain == null || envLastGeneratedTerrain.transform.position.z > GenerateZ)
         {
             GenerateEnv();
         }
@@ -109,13 +112,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateSection()
     {
-        var prefab = Objects[18];
-        
-        var obj = Instantiate(
-            prefab,
-            new Vector3(0, 0, GenerateZ),
-            Quaternion.identity
-        );
+        var obj = _generator.CreateNext(new Vector3(0, 0, GenerateZ));
         _visibleObjects.Add(obj);
     }
 
@@ -124,7 +121,10 @@ public class LevelGenerator : MonoBehaviour
         for (var i = 0; i < _visibleObjects.Count; i++)
         {
             var obj = _visibleObjects[i];
-            obj.transform.position = obj.transform.position - new Vector3(0, 0, -Speed * Time.deltaTime);
+            if (obj != null)
+            {
+                obj.transform.position = obj.transform.position - new Vector3(0, 0, -Speed * Time.deltaTime);
+            }
         }
     }
 

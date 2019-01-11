@@ -396,6 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225932827}
   - component: {fileID: 225932828}
+  - component: {fileID: 225932830}
   - component: {fileID: 225932829}
   m_Layer: 0
   m_Name: LevelGenerator
@@ -428,26 +429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77283069ed281f5418505dcc2fcc5ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Objects:
-  - {fileID: 1743700422853308, guid: 6901d5f36020f324b845b2f7e6194812, type: 2}
-  - {fileID: 1777542428794148, guid: 42c5398812f2f164ba6ebf1b16eadce1, type: 2}
-  - {fileID: 1831895620707302, guid: b274d9c069d7bde43aab9c7eb277b897, type: 2}
-  - {fileID: 1348514006630246, guid: e9f3441e4fdafb74fabea088cdd676bc, type: 2}
-  - {fileID: 1798376463038598, guid: 08cdaae346d7b2d48b3829e532737563, type: 2}
-  - {fileID: 1510311993993392, guid: 7569138677a5a73469cdd80398edc6c6, type: 2}
-  - {fileID: 1234590838390528, guid: eb3f8f6b101ad154f89891e6094ce7b4, type: 2}
-  - {fileID: 1280397004136720, guid: 8518c3a21ce625748a2fc532b3752c63, type: 2}
-  - {fileID: 1814660427582424, guid: 09f4a361702ec2c4290ffcc99ad2e9a6, type: 2}
-  - {fileID: 1475263439078298, guid: e086f48fd39c0e64094382fe83afcd93, type: 2}
-  - {fileID: 1748123652375818, guid: b6cf9dca01d5108439eaf5fea5b3e294, type: 2}
-  - {fileID: 1767884582312276, guid: 01ea39bea468c084b847f7dfba56e1cf, type: 2}
-  - {fileID: 1548142822684382, guid: cbca3230c74aa614d8d2d56999416e5c, type: 2}
-  - {fileID: 1566609292882348, guid: c18fd22ba044d29438dba6bfa69603fb, type: 2}
-  - {fileID: 1031571782648120, guid: 7e618a09156eed14086b7c6d884a5aa1, type: 2}
-  - {fileID: 1104668023978954, guid: 93ffa6f3a2f4eda4f9bd929d49ca10fa, type: 2}
-  - {fileID: 1585183359312520, guid: c113cd7b092f9504c9257fc973028651, type: 2}
-  - {fileID: 1096372408234232, guid: 80722b756e1f1e0459d9aaa36040e24a, type: 2}
-  - {fileID: 1507180376383308, guid: 75fd4f92d1f18e5499861aab36c324a9, type: 2}
   Speed: 0
   GenerateZ: -120
   IsDead: 0
@@ -550,6 +531,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &225932830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225932826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a072d012a69140aab7462b855a838985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EasyObstacles:
+  - {fileID: 1831895620707302, guid: b274d9c069d7bde43aab9c7eb277b897, type: 2}
+  - {fileID: 1348514006630246, guid: b592e69a10a9a6543ba72e3e3a2a6aee, type: 2}
+  - {fileID: 1348514006630246, guid: 53f31e7dfb82ec04c9cafd1f59e7926c, type: 2}
+  - {fileID: 1548142822684382, guid: cbca3230c74aa614d8d2d56999416e5c, type: 2}
+  - {fileID: 1566609292882348, guid: c18fd22ba044d29438dba6bfa69603fb, type: 2}
+  - {fileID: 1510311993993392, guid: 7569138677a5a73469cdd80398edc6c6, type: 2}
+  - {fileID: 1743700422853308, guid: 6901d5f36020f324b845b2f7e6194812, type: 2}
+  - {fileID: 1798376463038598, guid: 08cdaae346d7b2d48b3829e532737563, type: 2}
+  - {fileID: 1777542428794148, guid: 42c5398812f2f164ba6ebf1b16eadce1, type: 2}
+  - {fileID: 1831895620707302, guid: 94f25be53bafbb741b95a8b64f955b14, type: 2}
+  - {fileID: 1348514006630246, guid: 03ff25a6deab95f4482dcf35ff61cfb2, type: 2}
+  - {fileID: 1348514006630246, guid: 32a7f296cb0e26443a7a4ce19b5856c2, type: 2}
+  - {fileID: 1831895620707302, guid: 0b744995856f0da4d9a191e1a792b31e, type: 2}
+  - {fileID: 1831895620707302, guid: 2d839480d6520a141895040117a37419, type: 2}
+  - {fileID: 1234590838390528, guid: eb3f8f6b101ad154f89891e6094ce7b4, type: 2}
+  - {fileID: 1348514006630246, guid: e9f3441e4fdafb74fabea088cdd676bc, type: 2}
+  - {fileID: 1280397004136720, guid: 8518c3a21ce625748a2fc532b3752c63, type: 2}
+  - {fileID: 1748123652375818, guid: b6cf9dca01d5108439eaf5fea5b3e294, type: 2}
+  - {fileID: 1767884582312276, guid: 01ea39bea468c084b847f7dfba56e1cf, type: 2}
+  - {fileID: 1475263439078298, guid: e086f48fd39c0e64094382fe83afcd93, type: 2}
+  - {fileID: 1814660427582424, guid: 09f4a361702ec2c4290ffcc99ad2e9a6, type: 2}
+  MediumObstacles: []
+  HardObstacles: []
+  CoinPrefabs:
+  - {fileID: 1906157698351398, guid: eda20f1982903244a9921be5d9f64b11, type: 2}
+  - {fileID: 1048358759707546, guid: 6516fc44bc4b0d640bbd2d97d72f1290, type: 2}
+  - {fileID: 1507180376383308, guid: 75fd4f92d1f18e5499861aab36c324a9, type: 2}
 --- !u!1 &332438942
 GameObject:
   m_ObjectHideFlags: 0
@@ -31411,7 +31431,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c858538c49b7c464db9710c7df577260, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
