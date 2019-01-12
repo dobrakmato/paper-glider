@@ -68,6 +68,8 @@
     <Compile Include="Assets\Scripts\FireParticles.cs" />
     <Compile Include="Assets\Scripts\FollowAirplane.cs" />
     <Compile Include="Assets\Scripts\Level\CoinTrackMarker.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelRandom.cs" />
+    <Compile Include="Assets\Scripts\Level\Random.cs" />
     <Compile Include="Assets\Scripts\Level\Seeder.cs" />
     <Compile Include="Assets\Scripts\Level\SimpleGenerator.cs" />
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />

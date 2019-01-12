@@ -1,6 +1,6 @@
 using System;
+using Level;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 /* simplified version of very complicated generator */
 public class SimpleGenerator : MonoBehaviour
@@ -42,7 +42,7 @@ public class SimpleGenerator : MonoBehaviour
 
     private GameObject CreateNextObstacle(Vector3 at)
     {
-        if (_currentDifficulty > 1 && Random.Range(0f, 1f) > 0.9f)
+        if (_currentDifficulty > 1 && LevelRandom.Range(0f, 1f) > 0.9f)
         {
             var p = _player.transform.position;
             var targetY = p.y > 3f ? 1f : 4f;
@@ -56,7 +56,7 @@ public class SimpleGenerator : MonoBehaviour
         var obstacleCoinTrackMarker = obstacle.GetComponent<CoinTrackMarker>();
         if (obstacleCoinTrackMarker != null)
         {
-            if (Random.Range(0f, 1f) > 0.2f) obstacleCoinTrackMarker.Generate();
+            if (LevelRandom.Range(0f, 1f) > 0.2f) obstacleCoinTrackMarker.Generate();
         }
 
         return obstacle;
@@ -78,13 +78,13 @@ public class SimpleGenerator : MonoBehaviour
         if (_currentLeft == 0)
         {
             _currentType = _currentType == Type.Coin ? Type.Obstacle : Type.Coin;
-            _currentLeft = Random.Range(1, 6);
+            _currentLeft = LevelRandom.Range(1, 6);
         }
     }
 
     private GameObject ChooseCoin()
     {
-        return CoinPrefabs[Random.Range(0, CoinPrefabs.Length)];
+        return CoinPrefabs[LevelRandom.Range(0, CoinPrefabs.Length)];
     }
 
     private void IncreaseCurrentPart()
@@ -101,27 +101,27 @@ public class SimpleGenerator : MonoBehaviour
     {
         if (_currentDifficulty == 1)
         {
-            return EasyObstacles[Random.Range(0, EasyObstacles.Length)];
+            return EasyObstacles[LevelRandom.Range(0, EasyObstacles.Length)];
         }
 
         if (_currentDifficulty == 2)
         {
-            switch (Random.Range(0, 4))
+            switch (LevelRandom.Range(0, 4))
             {
-                case 0: return MediumObstacles[Random.Range(0, MediumObstacles.Length)];
-                case 1: return MediumObstacles[Random.Range(0, MediumObstacles.Length)];
-                case 2: return EasyObstacles[Random.Range(0, MediumObstacles.Length)];
-                case 3: return EasyObstacles[Random.Range(0, EasyObstacles.Length)];
+                case 0: return MediumObstacles[LevelRandom.Range(0, MediumObstacles.Length)];
+                case 1: return MediumObstacles[LevelRandom.Range(0, MediumObstacles.Length)];
+                case 2: return EasyObstacles[LevelRandom.Range(0, EasyObstacles.Length)];
+                case 3: return EasyObstacles[LevelRandom.Range(0, EasyObstacles.Length)];
                 default: throw new Exception("Should not happen");
             }
         }
 
-        switch (Random.Range(0, 4))
+        switch (LevelRandom.Range(0, 4))
         {
-            case 0: return HardObstacles[Random.Range(0, HardObstacles.Length)];
-            case 1: return HardObstacles[Random.Range(0, HardObstacles.Length)];
-            case 2: return MediumObstacles[Random.Range(0, MediumObstacles.Length)];
-            case 3: return EasyObstacles[Random.Range(0, EasyObstacles.Length)];
+            case 0: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
+            case 1: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
+            case 2: return MediumObstacles[LevelRandom.Range(0, MediumObstacles.Length)];
+            case 3: return EasyObstacles[LevelRandom.Range(0, EasyObstacles.Length)];
             default: throw new Exception("Should not happen");
         }
     }

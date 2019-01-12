@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Level;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -153,6 +155,7 @@ public class LevelGenerator : MonoBehaviour
     {
         IsDead = false;
         IsGenerating = true;
+        LevelRandom.ResetBySeeder();
 
         StartCoroutine("LevelSpeedup", new SpeedUpParams
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Level;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,7 +16,7 @@ public class ProceduralGeneratedTerrain : MonoBehaviour
 
     public GameObject EnvTree;
 
-    [NonSerialized] public int Seed = 0; /* TODO: Initialize from Seeder */
+    [NonSerialized] public int Seed = Seeder.ComputeSeed();
 
     private Mesh _mesh;
 
@@ -123,7 +124,7 @@ public class ProceduralGeneratedTerrain : MonoBehaviour
             
             if (Mathf.Abs(vert.x) < 4.5f) continue;
             if (Mathf.Abs(vert.y) > 12f) continue;
-            if (Random.Range(0f, 1f) < totalZDiff/1000) continue;
+            if (Random.Range(0f, 1f) < totalZDiff/1000) continue; /* this random is not gameplay-related */
 
             var segX = (int) map(vert.x, -10f, 10f, 0, TreeSegments);
             var segZ = (int) map(vert.z, -10f, 10f, 0, TreeSegments);

@@ -1,3 +1,4 @@
+using Level;
 using UnityEngine;
 
 public class CoinTrackMarker : MonoBehaviour
@@ -7,7 +8,7 @@ public class CoinTrackMarker : MonoBehaviour
 
     public void Generate()
     {
-        var position = Markers[Random.Range(0, Markers.Length)];
+        var position = Markers[LevelRandom.Range(0, Markers.Length)];
         var track = Instantiate(CoinTrack, position); // as parent of marker
         track.GetComponent<CoinTrack>().DestroyUpperRow();
     }
