@@ -20,7 +20,7 @@ public class UpgradeCoins : MonoBehaviour
     public void DoUpgrade()
     {
         var multiplier = PlayerPrefs.GetFloat("CoinMultiplier", 1f);
-        var price = Mathf.Round(multiplier / 0.0007f * 500) / 500;
+        var price = Mathf.Round(multiplier / 0.0007f / 500) * 500;
 
         var coins = PlayerPrefs.GetFloat("Coins", 0f);
 
@@ -44,7 +44,7 @@ public class UpgradeCoins : MonoBehaviour
         var price = multiplier / 0.0007f;
 
         MainText.text = Math.Round(multiplier * 1.07f, 2) + "x coins";
-        PriceText.text = "for " + Mathf.Round(price * 500) / 500 + "coins";
+        PriceText.text = "for " + Math.Round(Mathf.Round(price / 500) * 500) + " coins";
         CoinCount.text = "" + (int) PlayerPrefs.GetFloat("Coins", 0f);
     }
 }

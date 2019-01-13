@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\CoinTarget.cs" />
     <Compile Include="Assets\Scripts\CoinTrack.cs" />
     <Compile Include="Assets\Scripts\DestroyPlayer.cs" />
+    <Compile Include="Assets\Scripts\EnemyAirplaneActivator.cs" />
     <Compile Include="Assets\Scripts\FireParticles.cs" />
     <Compile Include="Assets\Scripts\FollowAirplane.cs" />
     <Compile Include="Assets\Scripts\Level\CoinTrackMarker.cs" />

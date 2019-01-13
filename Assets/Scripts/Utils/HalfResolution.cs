@@ -9,7 +9,8 @@ public class HalfResolution : MonoBehaviour
     {
         if (Application.isMobilePlatform)
         {
-            Screen.SetResolution(OriginalWidth / 2, OriginalHeight / 2, true);
+            Application.targetFrameRate = 60;
+            Screen.SetResolution(720, 1080, false, 60);
         }
     }
 }

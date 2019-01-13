@@ -49,7 +49,7 @@ public class AirplaneController : MonoBehaviour
         
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetFloat("Coins", 90000);
-        PlayerPrefs.SetFloat("Diamonds", 0);
+        PlayerPrefs.SetFloat("Diamonds", 9000);
         
 
         var currentCoinCount = PlayerPrefs.GetFloat("Coins", 0);
@@ -110,6 +110,8 @@ public class AirplaneController : MonoBehaviour
         LevelProgressBarGui.value = Score / 1000f;
     }
 
+    private static readonly string[] Names = {"Shakica", "Sarewien", "Ererikon44", "Nydinna1997", "Cidric", "Jeroveth"};
+    
     IEnumerator FlipFriendText()
     {
         yield return new WaitForSeconds(Random.Range(5, 8));
@@ -117,7 +119,7 @@ public class AirplaneController : MonoBehaviour
         {
             FriendTextGui.gameObject.GetComponent<Animation>().Play();
             yield return new WaitForSeconds(0.5f);
-            FriendTextGui.text = "Shakica: " + Random.Range(4000, 16000) + " pts";
+            FriendTextGui.text = Names[Random.Range(0, Names.Length)]+ ": " + Random.Range(4000, 16000) + " pts";
             yield return new WaitForSeconds(Random.Range(7, 14));
         }
     }

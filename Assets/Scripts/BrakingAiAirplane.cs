@@ -11,6 +11,7 @@ public class BrakingAiAirplane : MonoBehaviour
     public float BrakingTime = 3f;
 
     public GameObject Explosion;
+    public AudioSource BrakeingSound;
 
     public float Altitude;
     public float Speed = 1f;
@@ -19,14 +20,15 @@ public class BrakingAiAirplane : MonoBehaviour
     public bool ShouldFlyUp;
     public bool IsDead = true;
     public bool IsAttacking;
+    public int Charges = 1;
 
     private float _zPos;
-    private Vector3 _startPosition;
 
     private void Start()
     {
-        _startPosition = transform.position;
         Player = FindObjectOfType<AirplaneController>().gameObject;
+        _zPos = transform.position.z;
+        Altitude = transform.position.y;
     }
 
     void Update()
@@ -41,18 +43,17 @@ public class BrakingAiAirplane : MonoBehaviour
                 Altitude += (Speed > 0 ? ThrustPower / 2 : ThrustPower) * Time.fixedDeltaTime;
             }
 
-            var targetX = 0f;
+            var targetX = transform.position.x;
             if (_zPos < -3f)
             {
-                var dx = Player.transform.position.x - transform.position.x;
-                targetX = transform.position.x + dx * Mathf.Clamp01(Time.deltaTime * 2f);
+                targetX = Mathf.MoveTowards(transform.position.x, Player.transform.position.x, Time.deltaTime * 1f);
             }
 
             Altitude -= Fall * Time.fixedDeltaTime;
             var pitch = 90 * (Altitude - lastAltitude);
 
             transform.rotation = Quaternion.Euler(pitch, 0, Mathf.Sin(Time.time * 2f) * 15);
-            transform.position = _startPosition + new Vector3(targetX, Altitude, _zPos);
+            transform.position = new Vector3(targetX, Altitude, _zPos);
 
             if (Vector3.Distance(transform.position, Player.transform.position) > StartBrakingDistance && !IsAttacking)
             {
@@ -61,6 +62,11 @@ public class BrakingAiAirplane : MonoBehaviour
 
             if (transform.position.z > 5f)
             {
+                if (Charges == 0)
+                {
+                    Destroy(gameObject);
+                }
+
                 IsAttacking = false;
                 Speed = 16;
             }
@@ -79,6 +85,8 @@ public class BrakingAiAirplane : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        BrakeingSound.Play();
+        Charges--;
         IsAttacking = true;
         var targetSpeed = 2 * Speed;
         while (Speed > -20)

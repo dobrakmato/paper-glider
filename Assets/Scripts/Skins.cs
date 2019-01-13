@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,13 @@ public class Skins : MonoBehaviour
 {
     public Material[] AllSkins;
     public int[] AllSkinPrices;
+    public string[] AllSkinNames;
+
+    public Text SkinNameGui;
+    public Text DiamondCountGui;
     public Button BuySkinBtn;
     public ParticleSystem PuffParticles;
+    public ParticleSystem BuyParticles;
     public AudioClip PuffSound;
     public AudioClip TransactionSound;
     public AudioClip BadSound;
@@ -61,9 +67,11 @@ public class Skins : MonoBehaviour
         }
 
         PlayerPrefs.SetFloat("Diamonds", money - AllSkinPrices[selected]);
+        DiamondCountGui.text = "" + (int) PlayerPrefs.GetFloat("Diamonds");
         SetSkinBought(selected);
         SetSelectedSkin(selected);
         AudioSource.PlayClipAtPoint(TransactionSound, Vector3.zero);
+        BuyParticles.Play();
     }
 
     public void SetLastBoughtSkin() // called before game starts
@@ -86,7 +94,7 @@ public class Skins : MonoBehaviour
     private void SetSelectedSkin(int skinId)
     {
         var money = PlayerPrefs.GetFloat("Diamonds", 0f);
-        
+
         PlayerPrefs.SetInt("SelectedSkin", skinId);
         if (IsSkinBought(skinId)) PlayerPrefs.SetInt("UsedSkin", skinId);
 
@@ -94,6 +102,11 @@ public class Skins : MonoBehaviour
         BuySkinBtn.interactable = money >= AllSkinPrices[skinId];
         BuySkinBtn.GetComponentInChildren<Text>().text = "" + AllSkinPrices[skinId];
 
+        SkinNameGui.text = AllSkinNames[skinId];
+
         PlayerObject.material = AllSkins[skinId];
+        var color = PlayerObject.material.color;
+        color.a = IsSkinBought(skinId) ? 1 : 0.5f;
+        PlayerObject.material.color = color;
     }
 }

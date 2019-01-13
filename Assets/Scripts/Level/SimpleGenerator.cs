@@ -9,7 +9,7 @@ public class SimpleGenerator : MonoBehaviour
     public GameObject[] MediumObstacles;
     public GameObject[] HardObstacles;
     public GameObject[] CoinPrefabs;
-    public GameObject BrakingEnemy;
+    public GameObject BrakingEnemyActivator;
 
     private GameObject _player;
 
@@ -20,9 +20,9 @@ public class SimpleGenerator : MonoBehaviour
     }
 
     private Type _currentType = Type.Coin;
-    private int _currentLeft = 2;
+    private int _currentLeft = 3;
 
-    private int _currentDifficulty = 1; // 1 = easy, 2 = medium, 3 = hard
+    private int _currentDifficulty = 3; // 1 = easy, 2 = medium, 3 = hard
     private int _currentPart = 1;
 
     private void Start()
@@ -43,15 +43,6 @@ public class SimpleGenerator : MonoBehaviour
 
     private GameObject CreateNextObstacle(Vector3 at)
     {
-        if (_currentDifficulty > 1 && LevelRandom.Range(0f, 1f) > 0.9f)
-        {
-            var p = _player.transform.position;
-            var targetY = p.y > 3f ? 1f : 4f;
-
-            Instantiate(BrakingEnemy, new Vector3(-p.x, targetY, 9f), Quaternion.identity);
-            return new GameObject();
-        }
-
         var obstacle = Instantiate(ChooseObstacle(), at, Quaternion.identity);
 
         var obstacleCoinTrackMarker = obstacle.GetComponent<CoinTrackMarker>();
@@ -63,12 +54,27 @@ public class SimpleGenerator : MonoBehaviour
         return obstacle;
     }
 
+    static readonly float[] EnemyChance = {1.2f, 1.2f, 0.9f, 0.7f, 0.6f, 0.5f, 0.4f};
+
     private GameObject CreateNextCoin(Vector3 at)
     {
+        GameObject obj2 = null;
+        var chance = EnemyChance[Mathf.Clamp(_currentDifficulty, 0, EnemyChance.Length)];
+
+        if (false && _currentLeft > 1 && LevelRandom.Range(0f, 1f) > chance) 
+        {
+            obj2 = Instantiate(BrakingEnemyActivator, at, Quaternion.identity); // bonus thing instantiated
+        }
+
         var obj = Instantiate(ChooseCoin(), at, Quaternion.identity);
 
         var coinTrack = obj.GetComponent<CoinTrack>();
         if (coinTrack) coinTrack.RandomizeLocation();
+
+        if (obj2 != null)
+        {
+            obj2.transform.parent = obj.transform;
+        }
 
         return obj;
     }
@@ -81,8 +87,9 @@ public class SimpleGenerator : MonoBehaviour
             _currentType = _currentType == Type.Coin ? Type.Obstacle : Type.Coin;
             if (_currentDifficulty >= 2 && _currentType == Type.Coin)
             {
-                _currentLeft = LevelRandom.Range(1, 3);
+                _currentLeft = LevelRandom.Range(1, 4);
             }
+
             _currentLeft = LevelRandom.Range(1, 6);
         }
     }
@@ -121,7 +128,7 @@ public class SimpleGenerator : MonoBehaviour
             }
         }
 
-        switch (LevelRandom.Range(0, 4))
+        switch (LevelRandom.Range(0, 2))
         {
             case 0: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
             case 1: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
@@ -135,7 +142,7 @@ public class SimpleGenerator : MonoBehaviour
     {
         _currentType = Type.Coin;
         _currentLeft = 2;
-        _currentDifficulty = 1;
+        _currentDifficulty = 3;
         _currentPart = 1;
     }
 }
