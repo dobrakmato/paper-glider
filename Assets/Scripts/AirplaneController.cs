@@ -47,10 +47,6 @@ public class AirplaneController : MonoBehaviour
             Input.gyro.enabled = true;
         }
         
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetFloat("Coins", 90000);
-        PlayerPrefs.SetFloat("Diamonds", 9000);
-        
 
         var currentCoinCount = PlayerPrefs.GetFloat("Coins", 0);
         CoinCountGui.text = ((int) currentCoinCount).ToString();

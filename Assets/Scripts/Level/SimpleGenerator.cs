@@ -22,7 +22,7 @@ public class SimpleGenerator : MonoBehaviour
     private Type _currentType = Type.Coin;
     private int _currentLeft = 3;
 
-    private int _currentDifficulty = 3; // 1 = easy, 2 = medium, 3 = hard
+    private int _currentDifficulty = 1; // 1 = easy, 2 = medium, 3 = hard
     private int _currentPart = 1;
 
     private void Start()
@@ -61,7 +61,7 @@ public class SimpleGenerator : MonoBehaviour
         GameObject obj2 = null;
         var chance = EnemyChance[Mathf.Clamp(_currentDifficulty, 0, EnemyChance.Length)];
 
-        if (false && _currentLeft > 1 && LevelRandom.Range(0f, 1f) > chance) 
+        if (_currentLeft > 1 && LevelRandom.Range(0f, 1f) > chance) 
         {
             obj2 = Instantiate(BrakingEnemyActivator, at, Quaternion.identity); // bonus thing instantiated
         }
@@ -128,7 +128,7 @@ public class SimpleGenerator : MonoBehaviour
             }
         }
 
-        switch (LevelRandom.Range(0, 2))
+        switch (LevelRandom.Range(0, 4))
         {
             case 0: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
             case 1: return HardObstacles[LevelRandom.Range(0, HardObstacles.Length)];
@@ -142,7 +142,7 @@ public class SimpleGenerator : MonoBehaviour
     {
         _currentType = Type.Coin;
         _currentLeft = 2;
-        _currentDifficulty = 3;
+        _currentDifficulty = 1;
         _currentPart = 1;
     }
 }
