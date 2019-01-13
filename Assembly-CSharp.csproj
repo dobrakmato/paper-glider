@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\BrakingAiAirplane.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
     <Compile Include="Assets\Scripts\CoinCluster.cs" />
+    <Compile Include="Assets\Scripts\CoinFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\CoinTarget.cs" />
     <Compile Include="Assets\Scripts\CoinTrack.cs" />
     <Compile Include="Assets\Scripts\DestroyPlayer.cs" />
@@ -75,8 +76,11 @@
     <Compile Include="Assets\Scripts\LevelGenerator.cs" />
     <Compile Include="Assets\Scripts\ProcedularGeneration\ProceduralGeneratedTerrain.cs" />
     <Compile Include="Assets\Scripts\SinMover.cs" />
+    <Compile Include="Assets\Scripts\Skins.cs" />
+    <Compile Include="Assets\Scripts\Ui\BuyDiamond.cs" />
     <Compile Include="Assets\Scripts\Ui\TutorialGui.cs" />
     <Compile Include="Assets\Scripts\Ui\UiLogoRandomMovement.cs" />
+    <Compile Include="Assets\Scripts\Ui\UpgradeCoins.cs" />
     <Compile Include="Assets\Scripts\Utils\ConstantRotation.cs" />
     <Compile Include="Assets\Scripts\Utils\HalfResolution.cs" />
     <Compile Include="Assets\Scripts\Utils\Music.cs" />

@@ -156,6 +156,8 @@ public class LevelGenerator : MonoBehaviour
         IsDead = false;
         IsGenerating = true;
         LevelRandom.ResetBySeeder();
+        _generator.Reset();
+        FindObjectOfType<Skins>().SetLastBoughtSkin();
 
         StartCoroutine("LevelSpeedup", new SpeedUpParams
         {

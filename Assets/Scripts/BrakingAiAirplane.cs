@@ -26,6 +26,7 @@ public class BrakingAiAirplane : MonoBehaviour
     private void Start()
     {
         _startPosition = transform.position;
+        Player = FindObjectOfType<AirplaneController>().gameObject;
     }
 
     void Update()

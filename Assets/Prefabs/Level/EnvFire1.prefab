@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4182145831070152}
   - component: {fileID: 199451972619818480}
   - component: {fileID: 198054115097858482}
-  - component: {fileID: 114651207084530654}
   - component: {fileID: 114646975441648844}
   - component: {fileID: 82191319924599100}
   - component: {fileID: 114975666580740458}
@@ -122,7 +121,6 @@ GameObject:
   - component: {fileID: 4431268301083914}
   - component: {fileID: 199877825915247198}
   - component: {fileID: 198040430195790282}
-  - component: {fileID: 114372141138965524}
   - component: {fileID: 114388911873766258}
   - component: {fileID: 82000262653786962}
   - component: {fileID: 114203932905939374}
@@ -534,20 +532,6 @@ MonoBehaviour:
   - {fileID: 4270970896130470}
   - {fileID: 4815920085025554}
   CoinTrack: {fileID: 1906157698351398, guid: eda20f1982903244a9921be5d9f64b11, type: 2}
---- !u!114 &114372141138965524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1891299199162738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 828b7436f1b992c41b43b98ce48ce748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Axis: {x: 1, y: 0, z: 0}
-  Speed: 1
-  RandomOffset: 1
 --- !u!114 &114388911873766258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,20 +554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be680f84038073646a7fb89e3a4f583b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114651207084530654
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1052441720236036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 828b7436f1b992c41b43b98ce48ce748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Axis: {x: 1, y: 0, z: 0}
-  Speed: 1
-  RandomOffset: 1
 --- !u!114 &114975666580740458
 MonoBehaviour:
   m_ObjectHideFlags: 1

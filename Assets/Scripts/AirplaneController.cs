@@ -46,11 +46,16 @@ public class AirplaneController : MonoBehaviour
         {
             Input.gyro.enabled = true;
         }
+        
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetFloat("Coins", 90000);
+        PlayerPrefs.SetFloat("Diamonds", 0);
+        
 
         var currentCoinCount = PlayerPrefs.GetFloat("Coins", 0);
         CoinCountGui.text = ((int) currentCoinCount).ToString();
-        var currentDiamondCount = PlayerPrefs.GetInt("Diamonds", 0);
-        DiamondCountGui.text = currentDiamondCount.ToString();
+        var currentDiamondCount = PlayerPrefs.GetFloat("Diamonds", 0);
+        DiamondCountGui.text = ((int) currentDiamondCount).ToString();
 
         startPosition = transform.position;
         Invoke("DoABarrelRoll", Random.Range(5f, 20f));
@@ -80,7 +85,7 @@ public class AirplaneController : MonoBehaviour
             }
             else
             {
-                var highscore = 0;
+                var highscore = PlayerPrefs.GetInt("HighScore." + DateTime.Today.ToShortDateString());
                 if (highscore > 0)
                 {
                     ScoreGui.text = "Today best: " + (int) highscore + " pts";
@@ -223,6 +228,13 @@ public class AirplaneController : MonoBehaviour
     [Obsolete]
     private void RestartLevel()
     {
+        var today = DateTime.Today.ToShortDateString();
+        var todaysBest = PlayerPrefs.GetInt("HighScore." + today);
+        if (todaysBest < Score)
+        {
+            PlayerPrefs.SetInt("HighScore." + today, (int) Score);
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

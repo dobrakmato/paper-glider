@@ -10,7 +10,7 @@ public class SimpleGenerator : MonoBehaviour
     public GameObject[] HardObstacles;
     public GameObject[] CoinPrefabs;
     public GameObject BrakingEnemy;
-    
+
     private GameObject _player;
 
     private enum Type
@@ -28,6 +28,7 @@ public class SimpleGenerator : MonoBehaviour
     private void Start()
     {
         _player = FindObjectOfType<AirplaneController>().gameObject;
+        Reset();
     }
 
     public GameObject CreateNext(Vector3 at)
@@ -46,7 +47,7 @@ public class SimpleGenerator : MonoBehaviour
         {
             var p = _player.transform.position;
             var targetY = p.y > 3f ? 1f : 4f;
-            
+
             Instantiate(BrakingEnemy, new Vector3(-p.x, targetY, 9f), Quaternion.identity);
             return new GameObject();
         }
@@ -78,6 +79,10 @@ public class SimpleGenerator : MonoBehaviour
         if (_currentLeft == 0)
         {
             _currentType = _currentType == Type.Coin ? Type.Obstacle : Type.Coin;
+            if (_currentDifficulty >= 2 && _currentType == Type.Coin)
+            {
+                _currentLeft = LevelRandom.Range(1, 3);
+            }
             _currentLeft = LevelRandom.Range(1, 6);
         }
     }
@@ -124,5 +129,13 @@ public class SimpleGenerator : MonoBehaviour
             case 3: return EasyObstacles[LevelRandom.Range(0, EasyObstacles.Length)];
             default: throw new Exception("Should not happen");
         }
+    }
+
+    public void Reset()
+    {
+        _currentType = Type.Coin;
+        _currentLeft = 2;
+        _currentDifficulty = 1;
+        _currentPart = 1;
     }
 }
